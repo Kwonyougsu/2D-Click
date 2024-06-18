@@ -4,8 +4,8 @@ using UnityEngine.UI;
 public class HpController : MonoBehaviour
 {
     public Image img;
-    private float Cur_Hp;
-    private float Max_Hp;
+    public float Cur_Hp;
+    public float Max_Hp;
 
     public GameObject standing;
     public GameObject die;
@@ -16,20 +16,8 @@ public class HpController : MonoBehaviour
     }
     private void Start()
     {
-        Max_Hp = 100;
+        Max_Hp = 1000;
         Cur_Hp = Max_Hp;
     }
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Cur_Hp -= 10;
-        }
-        img.fillAmount = Cur_Hp / Max_Hp;
-        if(Cur_Hp <= 0)
-        {
-            standing.SetActive(false);
-            die.SetActive(true);
-        }
-    }
+
 }

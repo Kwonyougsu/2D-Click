@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class AttackMouseEvent : MonoBehaviour
 {
-
     private Animator anim;
     private AudioSource AudioSource;
-    // Start is called before the first frame update
+
+    public HpController HpController;
     void Awake()
     {
         anim = GetComponent<Animator>();
@@ -22,9 +22,18 @@ public class AttackMouseEvent : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            AudioSource.Stop();
             ResetAnimation();
             anim.SetTrigger("attack");
             AudioSource.Play();
+
+            HpController.Cur_Hp -= 5;
+            HpController.img.fillAmount = HpController.Cur_Hp / HpController.Max_Hp;
+            if (HpController.Cur_Hp <= 0)
+            {
+                HpController.standing.SetActive(false);
+                HpController.die.SetActive(true);
+            }
         }
     }
 }
